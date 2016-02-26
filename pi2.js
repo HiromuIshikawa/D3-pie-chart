@@ -3,15 +3,20 @@ var man = [1,12];
 var woman = [7,4];
 var all = [8, 16];
 var text = ["男性", "女性", "全体"];
+var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":25,"ans":"No"}];
+
 var width = 700;
 var height = 600;
+
 var radius = Math.min(width, height) / 2 - 10;
 
 var outerRadius = radius - 10;
 var innerRadius = radius - 200;
+
 var color = d3.scale.linear()
 .domain([0,1])
 .range(["#007bbb","#b94047"]);
+
 var pie = d3.layout.pie().value(function(d) {
   return d;
 }).sort(null);
@@ -27,7 +32,6 @@ var w_scale = d3.scale.linear()
 .rangeRound([0, 100]);
 
 var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
-
 
 var svg = d3.select("#pi")
 .append("svg")
@@ -81,7 +85,7 @@ var rectg = svg.append("g")
 .attr("class","rect")
 .attr("transform","translate(600,500)");
 
-var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":25,"ans":"No"}];
+
 
 var tag = rectg.selectAll("rect")
 .data(rectdata).enter()
