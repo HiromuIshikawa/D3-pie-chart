@@ -11,7 +11,7 @@ var outerRadius = radius - 10;
 var innerRadius = radius - 200;
 var color = d3.scale.linear()
 .domain([0,1])
-.range(["#007bbb","#e9546b"]);
+.range(["#007bbb","#b94047"]);
 var pie = d3.layout.pie().value(function(d) {
   return d;
 }).sort(null);
@@ -46,6 +46,8 @@ g.append("path")
 .attr("fill", function(d, i) {
   return color(i);
 })
+.attr("stroke", "white")
+.attr("stroke-width", 5)
 .attr("d", arc)
 .each(function(d) {
   this._current = d;
@@ -66,7 +68,7 @@ var c_text = svg
   "class":"center",
   "text-anchor":"middle",
   "font-size":40,
-  "transform":"translate(" + width/2 + "," + height/2 + ")"
+  "transform":"translate(" + width/2 + "," + (height/2+10) + ")"
 })
 .text(text[2]);
 
