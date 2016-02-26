@@ -10,7 +10,9 @@ var radius = Math.min(width, height) / 2 - 10;
 
 var outerRadius = radius - 10;
 var innerRadius = radius - 150;
-var color = d3.scale.category10();
+var color = d3.scale.linear()
+.domain([0,1])
+.range(["#007bbb","#e9546b"]);
 var pie = d3.layout.pie().value(function(d) {
   return d;
 }).sort(null);
@@ -53,6 +55,7 @@ g.append("path")
 g.append("text")
 .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
 .attr("font-size", "30")
+.attr("fill","white")
 .style("text-anchor", "middle")
 .text(function(d, i) { return yn[i] + " " + a_scale(d.data) + "%"; })
 .each(function(d) {
