@@ -64,6 +64,7 @@ var c_text = svg
 .attr({
   "class":"center",
   "text-anchor":"middle",
+  "font-size":40,
   "transform":"translate(" + width/2 + "," + height/2 + ")"
 })
 .text(text[2]);
