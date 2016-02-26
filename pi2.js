@@ -3,13 +3,12 @@ var man = [1,12];
 var woman = [7,4];
 var all = [8, 16];
 var text = ["男性", "女性", "全体"];
-var yn = ["Yes", "No"];
-var width = 640;
-var height = 480;
+var width = 700;
+var height = 600;
 var radius = Math.min(width, height) / 2 - 10;
 
 var outerRadius = radius - 10;
-var innerRadius = radius - 150;
+var innerRadius = radius - 200;
 var color = d3.scale.linear()
 .domain([0,1])
 .range(["#007bbb","#e9546b"]);
@@ -43,7 +42,6 @@ var g = a
 .enter()
 .append("g");
 
-
 g.append("path")
 .attr("fill", function(d, i) {
   return color(i);
@@ -57,7 +55,7 @@ g.append("text")
 .attr("font-size", "30")
 .attr("fill","white")
 .style("text-anchor", "middle")
-.text(function(d, i) { return yn[i] + " " + a_scale(d.data) + "%"; })
+.text(function(d) {return a_scale(d.data) + "%"; })
 .each(function(d) {
   this._current = d;
 });
@@ -72,10 +70,38 @@ var c_text = svg
 })
 .text(text[2]);
 
-
 d3.select("#btn1").on("click",function (){arcAnime(man, 0);} , false);
 d3.select("#btn2").on("click",function (){arcAnime(woman, 1);} , false);
 d3.select("#btn3").on("click",function (){arcAnime(all, 2);} , false);
+
+
+var rectg = svg.append("g")
+.attr("class","rect")
+.attr("transform","translate(600,500)");
+
+var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":25,"ans":"No"}];
+
+var tag = rectg.selectAll("rect")
+.data(rectdata).enter()
+.append("rect")
+.attr({
+  "x":function(d) { return d["x"];},
+  "y":function(d) { return d["y"];},
+  "width":"30",
+  "height":"20",
+  "fill":function(d, i){ return color(i);}
+});
+
+var tagtext = rectg.selectAll("text")
+.data(rectdata).enter()
+.append("text")
+.attr({
+  "x":function(d) {return d["x"]+31; },
+  "y":function(d) {return d["y"]+20; },
+  "font-size":20
+})
+.text(function(d){ return d["ans"];});
+
 
 function arcAnime(newdata, flag) {
   svg.selectAll("path")
@@ -94,13 +120,13 @@ function arcAnime(newdata, flag) {
 
   svg.selectAll("text")
   .data(pie(newdata))
-  .text(function(d, i) {
+  .text(function(d) {
     if(flag == 0) {
-      return yn[i] + " " +  m_scale(d.data) + "%";
+      return m_scale(d.data) + "%";
     } else if(flag == 1) {
-      return yn[i] + " " +w_scale(d.data) + "%";
+      return w_scale(d.data) + "%";
     }
-    return yn[i] + " " + a_scale(d.data) + "%";
+    return a_scale(d.data) + "%";
   })
   .transition()
   .duration(800)
