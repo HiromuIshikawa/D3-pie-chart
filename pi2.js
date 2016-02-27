@@ -73,7 +73,8 @@ g.append("text")
 var c_text = svg
 .append("g")
 .attr("class","c-text")
-.attr("transform","translate(" + width/2 + "," + height/2 + ")");
+.attr("transform","translate(" + width/2 + "," + height/2 + ")")
+.style("cursor","pointer");
 
 c_text.selectAll("text")
 .data(text).enter()
