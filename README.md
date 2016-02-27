@@ -1,4 +1,4 @@
-# IODD
+# D3 (y/n)pie-chart
 ---
 
 ## pi2.js
