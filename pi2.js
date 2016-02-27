@@ -166,7 +166,7 @@ var tagtext = rectg.selectAll("text")
 function cycleRight(type){
   svg.select(type)
   .transition()
-  .duration(1000)
+  .duration(800)
   .attr({
     "x": 0,
     "y": -30,
@@ -177,7 +177,7 @@ function cycleRight(type){
   if(type=="#man") {
     svg.select("#woman")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -187,7 +187,7 @@ function cycleRight(type){
 
     svg.select("#all")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
@@ -200,7 +200,7 @@ function cycleRight(type){
   }else if(type=="#woman") {
     svg.select("#all")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -210,7 +210,7 @@ function cycleRight(type){
 
     svg.select("#man")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
@@ -223,7 +223,7 @@ function cycleRight(type){
   } else {
     svg.select("#man")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -233,7 +233,7 @@ function cycleRight(type){
 
     svg.select("#woman")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
@@ -250,7 +250,7 @@ function cycleRight(type){
 function cycleLeft(type){
   svg.select(type)
   .transition()
-  .duration(1000)
+  .duration(800)
   .attr({
     "x": 0,
     "y": -30,
@@ -261,7 +261,7 @@ function cycleLeft(type){
   if(type=="#man") {
     svg.select("#woman")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -271,7 +271,7 @@ function cycleLeft(type){
 
     svg.select("#all")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
@@ -284,7 +284,7 @@ function cycleLeft(type){
   }else if(type=="#woman") {
     svg.select("#all")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -294,7 +294,7 @@ function cycleLeft(type){
 
     svg.select("#man")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
@@ -307,7 +307,7 @@ function cycleLeft(type){
   } else {
     svg.select("#man")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": -50,
       "y": 30,
@@ -317,7 +317,7 @@ function cycleLeft(type){
 
     svg.select("#woman")
     .transition()
-    .duration(1000)
+    .duration(800)
     .attr({
       "x": 50,
       "y": 30,
