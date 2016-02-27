@@ -85,7 +85,7 @@ c_text.selectAll("text")
   if(d["p"] == 0){
     return 40;
   }
-  return 25;
+  return 20;
 })
 .attr("x", function(d) {
   if(d["p"] == 0){
@@ -181,7 +181,7 @@ function cycleRight(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -191,7 +191,7 @@ function cycleRight(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=0;
@@ -204,7 +204,7 @@ function cycleRight(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -214,7 +214,7 @@ function cycleRight(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=2;
@@ -227,7 +227,7 @@ function cycleRight(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -237,7 +237,7 @@ function cycleRight(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=1;
@@ -265,7 +265,7 @@ function cycleLeft(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -275,7 +275,7 @@ function cycleLeft(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=0;
@@ -288,7 +288,7 @@ function cycleLeft(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -298,7 +298,7 @@ function cycleLeft(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=2;
@@ -311,7 +311,7 @@ function cycleLeft(type){
     .attr({
       "x": -50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
 
@@ -321,7 +321,7 @@ function cycleLeft(type){
     .attr({
       "x": 50,
       "y": 30,
-      "font-size": 25,
+      "font-size": 20,
       "fill": "rgba(0,0,0,0.5)"
     });
     text[0]["p"]=1;
