@@ -1,12 +1,12 @@
 
-var man = [1,12];
-var woman = [7,4];
-var all = [8, 16];
+var chart1 = [1,12,2,9,3];
+var chart2 = [7,4,12,8,3];
+var chart3 = [8, 16,6,4,3];
 
-var text = [{"text":"chart1", "p":1, "id":"man"}, {"text":"chart2", "p":2, "id":"woman"}, {"text":"chart3", "p":0, "id":"all"}];
+var text = [{"text":"chart1", "p":1, "id":"chart1"}, {"text":"chart2", "p":2, "id":"chart2"}, {"text":"chart3", "p":0, "id":"chart3"}];
 
 
-var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":30,"ans":"No"}];
+var rectdata = ["a","b","c","d","e"];
 
 var width = 700;
 var height = 600;
@@ -17,7 +17,7 @@ var outerRadius = radius - 10;
 var innerRadius = radius - 200;
 
 var color = d3.scale.linear()
-.domain([0,1])
+.domain([0,d3.map(chart1).size()-1])
 .range(["#007bbb","#b94047"]);
 
 var pie = d3.layout.pie().value(function(d) {
@@ -25,13 +25,13 @@ var pie = d3.layout.pie().value(function(d) {
 }).sort(null);
 
 var a_scale = d3.scale.linear()
-.domain([0, 24])
+.domain([0, d3.sum(chart3)])
 .rangeRound([0, 100]);
 var m_scale = d3.scale.linear()
-.domain([0, 13])
+.domain([0, d3.sum(chart1)])
 .rangeRound([0, 100]);
 var w_scale = d3.scale.linear()
-.domain([0, 11])
+.domain([0, d3.sum(chart2)])
 .rangeRound([0, 100]);
 
 var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
@@ -45,7 +45,7 @@ var a = svg.append("g")
 
 var g = a
 .selectAll("path")
-.data(pie(all))
+.data(pie(chart3))
 .enter()
 .append("g");
 
@@ -109,35 +109,35 @@ c_text.selectAll("text")
 })
 .text(function(d){return d["text"];});
 
-d3.select("#man").on("click",function (){
-  arcAnime(man, 0);
+d3.select("#chart1").on("click",function (){
+  arcAnime(chart1, 0);
   if(text[0]["p"]==1){
-    cycleRight("#man");
+    cycleRight("#chart1");
   } else if(text[0]["p"]==2) {
-    cycleLeft("#man");
+    cycleLeft("#chart1");
   }
 } , false);
-d3.select("#woman").on("click",function (){
-  arcAnime(woman, 1);
+d3.select("#chart2").on("click",function (){
+  arcAnime(chart2, 1);
   if(text[1]["p"]==1){
-    cycleRight("#woman");
+    cycleRight("#chart2");
   } else if(text[1]["p"]==2) {
-    cycleLeft("#woman");
+    cycleLeft("#chart2");
   }
 } , false);
-d3.select("#all").on("click",function (){
-  arcAnime(all, 2);
+d3.select("#chart3").on("click",function (){
+  arcAnime(chart3, 2);
   if(text[2]["p"]==1){
-    cycleRight("#all");
+    cycleRight("#chart3");
   } else if(text[2]["p"]==2) {
-    cycleLeft("#all");
+    cycleLeft("#chart3");
   }
 } , false);
 
 
 var rectg = svg.append("g")
 .attr("class","rect")
-.attr("transform","translate(590,500)");
+.attr("transform","translate(630,600)");
 
 
 
@@ -145,8 +145,8 @@ var tag = rectg.selectAll("rect")
 .data(rectdata).enter()
 .append("rect")
 .attr({
-  "x":function(d) { return d["x"];},
-  "y":function(d) { return d["y"];},
+  "x":0,
+  "y":function(d,i) { return -1*(d3.map(rectdata).size()-i)*30;},
   "width":"40",
   "height":"25",
   "fill":function(d, i){ return color(i);}
@@ -156,11 +156,11 @@ var tagtext = rectg.selectAll("text")
 .data(rectdata).enter()
 .append("text")
 .attr({
-  "x":function(d) {return d["x"]+41; },
-  "y":function(d) {return d["y"]+25; },
+  "x":41,
+  "y":function(d,i) {return -1*(d3.map(rectdata).size()-i)*30+25; },
   "font-size":25
 })
-.text(function(d){ return d["ans"];});
+.text(function(d){ return d;});
 
 
 function cycleRight(type){
@@ -174,8 +174,8 @@ function cycleRight(type){
     "fill": "rgba(0,0,0,1)"
   });
 
-  if(type=="#man") {
-    svg.select("#woman")
+  if(type=="#chart1") {
+    svg.select("#chart2")
     .transition()
     .duration(800)
     .attr({
@@ -185,7 +185,7 @@ function cycleRight(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#all")
+    svg.select("#chart3")
     .transition()
     .duration(800)
     .attr({
@@ -197,8 +197,8 @@ function cycleRight(type){
     text[0]["p"]=0;
     text[1]["p"]=1;
     text[2]["p"]=2;
-  }else if(type=="#woman") {
-    svg.select("#all")
+  }else if(type=="#chart2") {
+    svg.select("#chart3")
     .transition()
     .duration(800)
     .attr({
@@ -208,7 +208,7 @@ function cycleRight(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#man")
+    svg.select("#chart1")
     .transition()
     .duration(800)
     .attr({
@@ -221,7 +221,7 @@ function cycleRight(type){
     text[1]["p"]=0;
     text[2]["p"]=1;
   } else {
-    svg.select("#man")
+    svg.select("#chart1")
     .transition()
     .duration(800)
     .attr({
@@ -231,7 +231,7 @@ function cycleRight(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#woman")
+    svg.select("#chart2")
     .transition()
     .duration(800)
     .attr({
@@ -258,8 +258,8 @@ function cycleLeft(type){
     "fill": "rgba(0,0,0,1)"
   });
 
-  if(type=="#man") {
-    svg.select("#woman")
+  if(type=="#chart1") {
+    svg.select("#chart2")
     .transition()
     .duration(800)
     .attr({
@@ -269,7 +269,7 @@ function cycleLeft(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#all")
+    svg.select("#chart3")
     .transition()
     .duration(800)
     .attr({
@@ -281,8 +281,8 @@ function cycleLeft(type){
     text[0]["p"]=0;
     text[1]["p"]=1;
     text[2]["p"]=2;
-  }else if(type=="#woman") {
-    svg.select("#all")
+  }else if(type=="#chart2") {
+    svg.select("#chart3")
     .transition()
     .duration(800)
     .attr({
@@ -292,7 +292,7 @@ function cycleLeft(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#man")
+    svg.select("#chart1")
     .transition()
     .duration(800)
     .attr({
@@ -305,7 +305,7 @@ function cycleLeft(type){
     text[1]["p"]=0;
     text[2]["p"]=1;
   } else {
-    svg.select("#man")
+    svg.select("#chart1")
     .transition()
     .duration(800)
     .attr({
@@ -315,7 +315,7 @@ function cycleLeft(type){
       "fill": "rgba(0,0,0,0.5)"
     });
 
-    svg.select("#woman")
+    svg.select("#chart2")
     .transition()
     .duration(800)
     .attr({
