@@ -3,7 +3,7 @@ var man = [1,12];
 var woman = [7,4];
 var all = [8, 16];
 
-var text = [{"text":"男性", "p":1, "id":"man"}, {"text":"女性", "p":2, "id":"woman"}, {"text":"全体", "p":0, "id":"all"}];
+var text = [{"text":"chart1", "p":1, "id":"man"}, {"text":"chart2", "p":2, "id":"woman"}, {"text":"chart3", "p":0, "id":"all"}];
 
 
 var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":30,"ans":"No"}];
