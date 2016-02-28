@@ -6,7 +6,7 @@ var all = [8, 16];
 var text = [{"text":"男性", "p":1, "id":"man"}, {"text":"女性", "p":2, "id":"woman"}, {"text":"全体", "p":0, "id":"all"}];
 
 
-var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":25,"ans":"No"}];
+var rectdata = [{"x":0,"y":0,"ans":"Yes"},{"x":0,"y":30,"ans":"No"}];
 
 var width = 700;
 var height = 600;
@@ -137,7 +137,7 @@ d3.select("#all").on("click",function (){
 
 var rectg = svg.append("g")
 .attr("class","rect")
-.attr("transform","translate(600,500)");
+.attr("transform","translate(590,500)");
 
 
 
@@ -147,8 +147,8 @@ var tag = rectg.selectAll("rect")
 .attr({
   "x":function(d) { return d["x"];},
   "y":function(d) { return d["y"];},
-  "width":"30",
-  "height":"20",
+  "width":"40",
+  "height":"25",
   "fill":function(d, i){ return color(i);}
 });
 
@@ -156,9 +156,9 @@ var tagtext = rectg.selectAll("text")
 .data(rectdata).enter()
 .append("text")
 .attr({
-  "x":function(d) {return d["x"]+31; },
-  "y":function(d) {return d["y"]+20; },
-  "font-size":20
+  "x":function(d) {return d["x"]+41; },
+  "y":function(d) {return d["y"]+25; },
+  "font-size":25
 })
 .text(function(d){ return d["ans"];});
 
