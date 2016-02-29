@@ -3,7 +3,9 @@ var chart1 = [1,12,3,2,15,6];
 var chart2 = [7,4,3,9,16,13];
 var chart3 = [8,16,12,5,9,15];
 
+// 中心テキスト用配列 text:グラフ名 p:位置フラグ(0:表示 1:左 2:右) id:DOMid
 var text = [{"text":"chart1", "p":1, "id":"chart1"}, {"text":"chart2", "p":2, "id":"chart2"}, {"text":"chart3", "p":0, "id":"chart3"}];
+// 凡例名
 var rectdata = ["a","b","c","d","e","f"];
 
 // svg size
@@ -144,12 +146,12 @@ d3.select("#chart3").on("click",function (){
   }
 } , false);
 
-// 判例描画用グループ
+// 凡例描画用グループ
 var rectg = svg.append("g")
 .attr("class","rect")
 .attr("transform","translate(630,600)");
 
-// 判例用長方形の描画
+// 凡例用長方形の描画
 var tag = rectg.selectAll("rect")
 .data(rectdata).enter()
 .append("rect")
@@ -160,7 +162,7 @@ var tag = rectg.selectAll("rect")
   "height":"25",
   "fill":function(d, i){ return color(i);}
 });
-// 判例名の描画
+// 凡例名の描画
 var tagtext = rectg.selectAll("text")
 .data(rectdata).enter()
 .append("text")
