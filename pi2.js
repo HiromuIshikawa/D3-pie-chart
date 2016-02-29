@@ -17,6 +17,7 @@ var radius = Math.min(width, height) / 2 - 10;
 //outer and  inner size
 var outerRadius = radius - 10;
 var innerRadius = radius - 200;
+// var cornerRadius = 20;
 
 // original color scale
 // var color = d3.scale.linear()
@@ -29,7 +30,7 @@ var pie = d3.layout.pie().value(function(d) {
   return d;
 }).sort(null);
 // 円弧の設定
-var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+var arc = d3.svg.arc()./*cornerRadius(cornerRadius).*/innerRadius(innerRadius).outerRadius(outerRadius);
 
 // 百分率表示用スケール
 var a_scale = d3.scale.linear()
