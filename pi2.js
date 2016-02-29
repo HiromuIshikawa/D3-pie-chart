@@ -1,12 +1,12 @@
 
-var chart1 = [1,12,3,2,15,6];
-var chart2 = [7,4,3,9,16,13];
-var chart3 = [8,16,12,5,9,15];
+var chart1 = [1,12,3,2];
+var chart2 = [7,4,3,9];
+var chart3 = [8,16,12,5];
 
 // 中心テキスト用配列 text:グラフ名 p:位置フラグ(0:表示 1:左 2:右) id:DOMid
 var text = [{"text":"chart1", "p":1, "id":"chart1"}, {"text":"chart2", "p":2, "id":"chart2"}, {"text":"chart3", "p":0, "id":"chart3"}];
 // 凡例名
-var rectdata = ["a","b","c","d","e","f"];
+var rectdata = ["a","b","c","d"];
 
 // svg size
 var width = 900;
@@ -19,10 +19,11 @@ var outerRadius = radius - 10;
 var innerRadius = radius - 200;
 
 // original color scale
-var color = d3.scale.linear()
-.domain([0,d3.map(chart1).size()-1])
-.range(["#007bbb","#b94047"]);
+// var color = d3.scale.linear()
+// .domain([0,d3.map(chart1).size()-1])
+// .range(["#007bbb","#b94047"]);
 
+var color = d3.scale.category10();
 // 扇(パイ)の大きさ設定
 var pie = d3.layout.pie().value(function(d) {
   return d;
@@ -178,6 +179,7 @@ function cycleRight(type){
   svg.select(type)
   .transition()
   .duration(800)
+  .ease("bounce")
   .attr({
     "x": 0,
     "y": -30,
@@ -189,6 +191,7 @@ function cycleRight(type){
     svg.select("#chart2")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -199,6 +202,7 @@ function cycleRight(type){
     svg.select("#chart3")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -212,6 +216,7 @@ function cycleRight(type){
     svg.select("#chart3")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -222,6 +227,7 @@ function cycleRight(type){
     svg.select("#chart1")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -235,6 +241,7 @@ function cycleRight(type){
     svg.select("#chart1")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -245,6 +252,7 @@ function cycleRight(type){
     svg.select("#chart2")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -262,6 +270,7 @@ function cycleLeft(type){
   svg.select(type)
   .transition()
   .duration(800)
+  .ease("bounce")
   .attr({
     "x": 0,
     "y": -30,
@@ -273,6 +282,7 @@ function cycleLeft(type){
     svg.select("#chart2")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -283,6 +293,7 @@ function cycleLeft(type){
     svg.select("#chart3")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -296,6 +307,7 @@ function cycleLeft(type){
     svg.select("#chart3")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -306,6 +318,7 @@ function cycleLeft(type){
     svg.select("#chart1")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -319,6 +332,7 @@ function cycleLeft(type){
     svg.select("#chart1")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": -50,
       "y": 30,
@@ -329,6 +343,7 @@ function cycleLeft(type){
     svg.select("#chart2")
     .transition()
     .duration(800)
+    .ease("bounce")
     .attr({
       "x": 50,
       "y": 30,
@@ -347,6 +362,7 @@ function arcAnime(newdata, flag) {
   .data(pie(newdata))
   .transition()
   .duration(800)
+  .ease("bounce")
   .attrTween("d", function(d) {
     var interpolate = d3.interpolate(this._current, d);
     this._current = interpolate(0);
@@ -369,6 +385,7 @@ function arcAnime(newdata, flag) {
   })
   .transition()
   .duration(800)
+  .ease("bounce")
   .attrTween("transform", function(d) {
     var interpolate = d3.interpolate(arc.centroid(this._current), arc.centroid(d));
     this._current = d;
