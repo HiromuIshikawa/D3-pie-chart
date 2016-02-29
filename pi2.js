@@ -1,29 +1,34 @@
 
-var chart1 = [1,12,2,9,3];
-var chart2 = [7,4,12,8,3];
-var chart3 = [8, 16,6,4,3];
+var chart1 = [1,12,3,2,15,6];
+var chart2 = [7,4,3,9,16,13];
+var chart3 = [8,16,12,5,9,15];
 
 var text = [{"text":"chart1", "p":1, "id":"chart1"}, {"text":"chart2", "p":2, "id":"chart2"}, {"text":"chart3", "p":0, "id":"chart3"}];
+var rectdata = ["a","b","c","d","e","f"];
 
-
-var rectdata = ["a","b","c","d","e"];
-
-var width = 700;
+// svg size
+var width = 900;
 var height = 600;
 
+// pie chart size
 var radius = Math.min(width, height) / 2 - 10;
-
+//outer and  inner size
 var outerRadius = radius - 10;
 var innerRadius = radius - 200;
 
+// original color scale
 var color = d3.scale.linear()
 .domain([0,d3.map(chart1).size()-1])
 .range(["#007bbb","#b94047"]);
 
+// 扇(パイ)の大きさ設定
 var pie = d3.layout.pie().value(function(d) {
   return d;
 }).sort(null);
+// 円弧の設定
+var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
+// 百分率表示用スケール
 var a_scale = d3.scale.linear()
 .domain([0, d3.sum(chart3)])
 .rangeRound([0, 100]);
@@ -34,34 +39,37 @@ var w_scale = d3.scale.linear()
 .domain([0, d3.sum(chart2)])
 .rangeRound([0, 100]);
 
-var arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
-
+// svg
 var svg = d3.select("#pi")
 .append("svg")
 .attr("width", width).attr("height", height);
 
+// all groupe
 var a = svg.append("g")
-.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+.attr("transform", "translate(" + (width/2-100) + "," + height / 2 + ")");
 
+// 一つ一つのデータに対し円弧の設定(テキストと円弧を同時に扱うため)
 var g = a
 .selectAll("path")
-.data(pie(chart3))
+.data(pie(chart3)) // 設定したpieによりデータを変換
 .enter()
 .append("g");
 
+// 読み込んだデータを元にパスを作成
 g.append("path")
 .attr("fill", function(d, i) {
   return color(i);
 })
 .attr("stroke", "white")
 .attr("stroke-width", 5)
-.attr("d", arc)
+.attr("d", arc) // 円弧の設定によりパスを描画
 .each(function(d) {
-  this._current = d;
+  this._current = d; // 現在の値を保存
 });
 
+// 百分率を表示
 g.append("text")
-.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })// arc.centroid()で図形の中心の座標を得る．
 .attr("font-size", "30")
 .attr("fill","white")
 .style("text-anchor", "middle")
@@ -70,10 +78,11 @@ g.append("text")
   this._current = d;
 });
 
+// グラフの中心にグラフ名を描画
 var c_text = svg
 .append("g")
 .attr("class","c-text")
-.attr("transform","translate(" + width/2 + "," + height/2 + ")")
+.attr("transform","translate(" + (width/2-100) + "," + height/2 + ")")
 .style("cursor","pointer");
 
 c_text.selectAll("text")
@@ -109,6 +118,7 @@ c_text.selectAll("text")
 })
 .text(function(d){return d["text"];});
 
+// 中心グラフ名をクリックした際のイベント
 d3.select("#chart1").on("click",function (){
   arcAnime(chart1, 0);
   if(text[0]["p"]==1){
@@ -134,13 +144,12 @@ d3.select("#chart3").on("click",function (){
   }
 } , false);
 
-
+// 判例描画用グループ
 var rectg = svg.append("g")
 .attr("class","rect")
 .attr("transform","translate(630,600)");
 
-
-
+// 判例用長方形の描画
 var tag = rectg.selectAll("rect")
 .data(rectdata).enter()
 .append("rect")
@@ -151,7 +160,7 @@ var tag = rectg.selectAll("rect")
   "height":"25",
   "fill":function(d, i){ return color(i);}
 });
-
+// 判例名の描画
 var tagtext = rectg.selectAll("text")
 .data(rectdata).enter()
 .append("text")
@@ -162,7 +171,7 @@ var tagtext = rectg.selectAll("text")
 })
 .text(function(d){ return d;});
 
-
+// 右回転アニメーション
 function cycleRight(type){
   svg.select(type)
   .transition()
@@ -246,7 +255,7 @@ function cycleRight(type){
   }
 }
 
-
+// 左回転アニメーション
 function cycleLeft(type){
   svg.select(type)
   .transition()
@@ -330,7 +339,7 @@ function cycleLeft(type){
   }
 }
 
-
+// 円グラフ変換アニメーション
 function arcAnime(newdata, flag) {
   svg.selectAll("path")
   .data(pie(newdata))
